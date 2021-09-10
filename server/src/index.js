@@ -1,3 +1,4 @@
+
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -7,9 +8,8 @@ const middlewares = require('./middlewares');
 const logs = require('./api/logs');
 
 require('dotenv').config();
-// mongodb+srv://ceddah:cedaceda@cluster0.uobse.mongodb.net/TravelLog?retryWrites=true&w=majority
 const app = express();
-
+/* eslint-disable no-undef */
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
