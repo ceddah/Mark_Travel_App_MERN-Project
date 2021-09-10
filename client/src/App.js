@@ -39,7 +39,7 @@ function App() {
             latitude={entry.latitude} 
             >
               <svg
-                    onClick={() => setShowPopup({ ...showPopup, [entry._id]: true })}
+                    onClick={() => setShowPopup({ [entry._id]: true })}
                     className="marker yellow"
                     style={{
                       height: `${6 * viewport.zoom}px`,
@@ -61,10 +61,15 @@ function App() {
               latitude={entry.latitude} 
               closeButton={true}
               closeOnClick={false}
-              onClose={() => {}}
+              dynamicPosition={true}
+              onClose={() => setShowPopup({})}
               anchor="top"
               >
-                You are here
+                <div className="popup">
+                  <h3>{entry.title}</h3>
+                  <p>{entry.comments}</p>
+                  <small>Visited on: {new Date(entry.visitDate).toLocaleDateString()}</small>
+                </div>
               </Popup>
               ) : null}
         </React.Fragment>
