@@ -14,15 +14,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const logEntry = new LogEntry({
-      title: req.body.title,
-      comments: 'I really enjoed this one. I saw bunch of amazing animals.',
-      latitude: 39.7518221,
-      longitude: -105.0161281,
-      rating: 8,
-      image: '',
-      visitDate: new Date().toISOString(),
-    });
+    const logEntry = new LogEntry(req.body);
     const createdEntry = await logEntry.save();
     res.json(createdEntry);
   } catch (err) {

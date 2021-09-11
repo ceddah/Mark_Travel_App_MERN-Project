@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { listLogEntries } from './API';
+import LogEntryForm from "./LogEntryForm";
 
 function App() {
   const [logEntries, setLogEntries] = useState([]);
@@ -21,13 +22,13 @@ function App() {
     setAddEntryLocation({ latitude, longitude });
   };
 
-  useEffect(() => {
-    (async() => {
+  const getEntries = async () => {
       const logEntries = await listLogEntries();
       setLogEntries(logEntries);
-      console.log(logEntries);
-    })();
+  }
 
+  useEffect(() => {
+    getEntries();
   }, [])
 
   return (
@@ -39,9 +40,8 @@ function App() {
       onDblClick={showAddMarkerPopup}
     >
       {logEntries.map(entry => (
-        <React.Fragment>
+        <React.Fragment key={entry._id}>
           <Marker
-            key={entry._id}
             longitude={entry.longitude} 
             latitude={entry.latitude} 
             >
@@ -113,7 +113,7 @@ function App() {
               anchor="top"
               >
                 <div className="popup">
-                  <h3>Add you new Log Entry here:</h3>
+                  <LogEntryForm onClose={() => { setAddEntryLocation(null); getEntries() }} location={addEntryLocation} />
                 </div>
               </Popup> 
           </>
