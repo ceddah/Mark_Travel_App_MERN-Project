@@ -30,12 +30,20 @@ body {
   padding: 1rem;
 }
 
+.star-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
 .popup img {
   height: 200px;
-  width: auto;
+  width: 100%;
+  object-fit: cover;
   text-align: center;
-  margin: 0 auto;
+  margin: 0.5rem auto;
   display: block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
 }
 
 .entry-form label,

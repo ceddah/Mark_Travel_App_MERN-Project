@@ -12,8 +12,7 @@ const LogEntryForm = ({ location, onClose }) => {
             setLoading(true);
             data.latitude = location.latitude;
             data.longitude = location.longitude;
-            const created = await createLogEntry(data);
-            console.log(created);
+            await createLogEntry(data);
             onClose();
         } catch (err) {
             console.log(err);
@@ -35,6 +34,8 @@ const LogEntryForm = ({ location, onClose }) => {
             <input name="image" {...register('image')} />
             <label htmlFor="visitDate">Visit Date:</label>
             <input name="visitDate" type="date" required {...register('visitDate')} />
+            <label htmlFor="visitDate">Rate your Experience 0-10:</label>
+            <input name="rating" type="number" min="0" max="10" defaultValue="5" {...register('rating')} />
             <button disabled={loading}>{loading ? 'Loading...' : 'Create Log Entry'}</button>
         </form>
     )
